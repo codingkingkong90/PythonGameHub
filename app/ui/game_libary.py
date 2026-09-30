@@ -13,8 +13,6 @@ def create_game_libary(parent, router):
     snake_libary_card = ctk.CTkFrame(libary_container, fg_color="#333333")
     snake_libary_card.grid(row=1, column=0, pady=10, sticky="nw")
 
-    snake_libary_card.place(x=0, y=0)
-
     #snake_libary-----------------------------------------------------------
     return main_libary_card
 
