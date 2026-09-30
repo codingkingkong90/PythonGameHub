@@ -13,7 +13,7 @@ def create_home_page(parent, router):
     main_label = ctk.CTkLabel(home_container, text="Welcome to the GameHub", font=("Arial", 50))
     main_label.grid(row=1, column=0, pady=10)
 
-    play_button = ctk.CTkButton(home_container, text="Game Libary", hover_color="light blue", command=None)
+    play_button = ctk.CTkButton(home_container, text="Game Libary", hover_color="light blue", command= lambda: router("game_libary"))
     play_button.grid(row=2, column=0, pady=10)
 
     return home_card

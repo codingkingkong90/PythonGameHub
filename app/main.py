@@ -1,5 +1,7 @@
 import customtkinter as ctk
 from ui import home
+from ui import game_libary
+from ui import sign_up
 
 root = ctk.CTk()
 root.title("GameHub")
@@ -20,11 +22,13 @@ def navigate_to(page_name):
 
     if page_name == "home":
         active_frame = home.create_home_page(root, navigate_to)
+    elif page_name == "game_libary":
+        active_frame = game_libary.create_game_libary(root, navigate_to)
+    elif page_name == "sign_up":
+        active_frame = sign_up.create_signup_page(root, navigate_to)
 
     if active_frame is not None:
         active_frame.pack(expand=True, fill="both")
 
 navigate_to("home")
 root.mainloop()
-    
-

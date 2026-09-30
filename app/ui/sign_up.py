@@ -1,3 +1,3 @@
 import customtkinter as ctk
-from ..services import firestore
+#from ..services import firestore
 
