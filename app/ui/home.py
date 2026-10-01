@@ -16,5 +16,8 @@ def create_home_page(parent, router):
     play_button = ctk.CTkButton(home_container, text="Game Libary", hover_color="light blue", command= lambda: router("game_libary"))
     play_button.grid(row=2, column=0, pady=10)
 
+    profile_button = ctk.CTkButton(home_container, text="Profile", hover_color="light blue", command= lambda: router("sign_up"))
+    profile_button.grid(row=3, column=0, pady=10)
+
     return home_card
 

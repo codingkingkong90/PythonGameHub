@@ -15,12 +15,13 @@ def create_signup_page(parent, router):
 #global variables-------------------------------------------------------------
     password = ctk.StringVar()
     min_legnth = 8
-    
+    errors = ["lowercase letter", "uppercase letter", "digit", "special chracter"]
 
 #functions--------------------------------------------------------------------
     def handle_signup():
         username = signup_username.get().split()
         email = signup_email.get().split()
+        password = signup_password.get().split()
         
         result = firebase_auth.signup_user(email, password)
 
@@ -37,11 +38,13 @@ def create_signup_page(parent, router):
                     pass
 
 
-    def check_condition(condition, label):
+    def check_condition(condition, errors):
         if condition:
-            label.grid_remove()
+            for error in errors:
+                error_label.config(text="Your password needs " + errors[error])
         else:
-            label.grid()
+            error_label.grid_remove()
+            
 
     def password_requirments(*args):
         password = signup_password.get().split()
@@ -52,7 +55,7 @@ def create_signup_page(parent, router):
         has_digit = any(c.isdigit() for c in password)
         has_special = any(c.isspecial() for c in password)
 
-        check_condition(has_lower, )
+        check_condition(has_lower, errors[0])
 
 
     signup_username = ctk.CTkEntry(signup_container, placeholder_text="Username")
@@ -67,5 +70,9 @@ def create_signup_page(parent, router):
     signup_confirm_password = ctk.CTkEntry(signup_container, placeholder_text="Please rewrite your password")
     signup_confirm_password.grid(row=4, column=0, pady=5)
 
-    signup_button = ctk.CTkButton(signup_container, )
+    error_label = ctk.CTkLabel(signup_container, textvariable=errors)
+    error_label.grid(row=5, column=0, pady=5)
+
+    signup_button = ctk.CTkButton(signup_container, text="Signup")
+    signup_button.grid(row=6, column=0, pady=5)
 
