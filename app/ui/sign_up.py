@@ -53,9 +53,10 @@ def create_signup_page(parent, router):
         has_lower = any(c.islower() for c in password)
         has_upper = any(c.isupper() for c in password)
         has_digit = any(c.isdigit() for c in password)
-        has_special = any(c.isspecial() for c in password)
 
         check_condition(has_lower, errors[0])
+        check_condition(has_upper, errors[1])
+        check_condition(has_digit, errors[2])
 
 
     signup_username = ctk.CTkEntry(signup_container, placeholder_text="Username")
@@ -70,9 +71,10 @@ def create_signup_page(parent, router):
     signup_confirm_password = ctk.CTkEntry(signup_container, placeholder_text="Please rewrite your password")
     signup_confirm_password.grid(row=4, column=0, pady=5)
 
-    error_label = ctk.CTkLabel(signup_container, textvariable=errors)
+    error_label = ctk.CTkLabel(signup_container, text="")
     error_label.grid(row=5, column=0, pady=5)
 
     signup_button = ctk.CTkButton(signup_container, text="Signup")
     signup_button.grid(row=6, column=0, pady=5)
 
+    return signup_card
