@@ -1,11 +1,11 @@
 import customtkinter as ctk
-from ui import home
-from ui import game_libary
-from ui import sign_up
-from ui import login
-from ui import settings
-from ui import profile
-from ui import password_reset
+from app.ui import home
+from app.ui import game_libary
+from app.ui import sign_up
+from app.ui import login
+from app.ui import settings
+from app.ui import profile
+from app.ui import password_reset
 
 root = ctk.CTk()
 root.title("GameHub")
