@@ -19,25 +19,36 @@ def create_signup_page(parent, router):
     error_message = ctk.StringVar(value="")
 #functions--------------------------------------------------------------------
     def handle_signup():
-        username = signup_username.get().split()
-        email = signup_email.get().split()
-        password = signup_password.get().split()
+        user_name = signup_username.get().strip()
+        user_email = signup_email.get().strip()
+        user_pwd = signup_password.get().strip()
+
+        if not user_name or not user_email or not user_pwd:
+            error_message.set("All fields are required.")
+            return
+
+        result = firebase_auth.signup_user(user_email, user_pwd)
         
-        result = firebase_auth.signup_user(email, password)
+        if result["success"]:
+            user_data = result["user"]
 
-        if signup_button:
-            if result["success"]:
-                try:
-                    firestore.create_user_document(
-                        result["localId"],
-                        username,
-                        email,
-                        result["idToken"]
-                    )
-                except:
-                    pass
+            user_id = user_data["localId"]
+            id_token = user_data["idToken"]
+            try:
+                firestore.create_user_document(
+                    user_id,
+                    user_name,
+                    user_email,
+                    id_token
+                )
+            except Exception as e:
+                error_message.set(f"Auth succeeded, but profile creation")
+                print("--- FIRESTORE WRITE ERROR START ---")
+                print(e)
+                print("--- FIRESTORE WRITE ERROR END ---")
+                
 
-    password.trace_add("write", password_check.password_requirments(password, confirm_password, error_message))
+    password_check.password_requirments(password, confirm_password, error_message)
     
     signup_username = ctk.CTkEntry(signup_container, placeholder_text="Username")
     signup_username.grid(row=1, column=0, pady=5)

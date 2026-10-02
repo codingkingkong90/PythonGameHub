@@ -3,15 +3,13 @@ import requests
 from .firebase_config import FIREBASE_CONFIG
 
 def create_user_document(user_id, username, email, id_token):
-    url = (
-        f"https://firestore.googleapis.com/v1/projects",
-        f"{FIREBASE_CONFIG['project_id']}/databases/(default)/document/users",
-        f"?documentId={user_id}"
-    )
+
+    project_id = FIREBASE_CONFIG['projectId']
+    url = f"https://firestore.googleapis.com/v1/projects/{project_id}/databases/(default)/documents/users?documentId={user_id}"
 
     headers = {
         "Authorization": f"Bearer {id_token}",
-        "Content-Type": "applications/json"
+        "Content-Type": "application/json"
     }
 
     data = {
@@ -30,5 +28,8 @@ def create_user_document(user_id, username, email, id_token):
         json=data,
         headers=headers
     )
+
+    if not response.ok:
+        raise Exception(f"Firestore Error {response.status_code}: {response.text}")
 
     return response
