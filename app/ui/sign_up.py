@@ -37,7 +37,7 @@ def create_signup_page(parent, router):
                 except:
                     pass
 
-    password_check.password_requirments(password, confirm_password, error_message)
+    password.trace_add("write", password_check.password_requirments(password, confirm_password, error_message))
     
     signup_username = ctk.CTkEntry(signup_container, placeholder_text="Username")
     signup_username.grid(row=1, column=0, pady=5)
