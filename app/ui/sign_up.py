@@ -41,6 +41,7 @@ def create_signup_page(parent, router):
                     user_email,
                     id_token
                 )
+                router("login")
             except Exception as e:
                 error_message.set(f"Auth succeeded, but profile creation")
                 print("--- FIRESTORE WRITE ERROR START ---")

@@ -30,6 +30,8 @@ def navigate_to(page_name):
         active_frame = game_libary.create_game_libary(root, navigate_to)
     elif page_name == "sign_up":
         active_frame = sign_up.create_signup_page(root, navigate_to)
+    #elif page_name == "login":
+        #active_frame = login,create_login_page(root, navigate_to)
 
     if active_frame is not None:
         active_frame.pack(expand=True, fill="both")
