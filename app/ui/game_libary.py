@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from services import game_launcher
 
 def create_game_libary(parent, router):
     main_libary_card = ctk.CTkFrame(parent)
